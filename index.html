@@ -112,25 +112,9 @@ ul.task-list li input[type="checkbox"] {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Hockey Analysis</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <div class="cell">
@@ -142,6 +126,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>This visualization illustrates the strategic evolution of NHL offenses over the last two decades, highlighting a clear shift from volume-based shooting to efficiency-based shot selection. As advanced analytics became prominent in front offices, teams began to discourage low-probability attempts from the perimeter, opting instead to hold possession longer to generate high-danger chances. The chart reveals a distinct trajectory: earlier seasons (in darker colors) cluster towards the bottom-right, indicating high shot volume but low quality, while modern seasons (in brighter colors) have moved towards the top-left, characterized by slightly fewer shots per game but a significantly higher Average Expected Goals (xG) per shot. This data was sourced from MoneyPuck.com, which provides comprehensive advanced metrics for every NHL shot recorded since 2007.</p>
 
 
 
@@ -218,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/davidkane9\.github\.io\/hockey\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

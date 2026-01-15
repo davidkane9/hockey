@@ -4,6 +4,13 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "David Kane teaches data science and New College of Florida. See the GitHub repo for details about this project."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hockey Analysis",
+    "section": "",
+    "text": "This visualization illustrates the strategic evolution of NHL offenses over the last two decades, highlighting a clear shift from volume-based shooting to efficiency-based shot selection. As advanced analytics became prominent in front offices, teams began to discourage low-probability attempts from the perimeter, opting instead to hold possession longer to generate high-danger chances. The chart reveals a distinct trajectory: earlier seasons (in darker colors) cluster towards the bottom-right, indicating high shot volume but low quality, while modern seasons (in brighter colors) have moved towards the top-left, characterized by slightly fewer shots per game but a significantly higher Average Expected Goals (xG) per shot. This data was sourced from MoneyPuck.com, which provides comprehensive advanced metrics for every NHL shot recorded since 2007."
   }
 ]

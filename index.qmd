@@ -1,0 +1,50 @@
+---
+title: "Hockey Analysis"
+execute: 
+  echo: false
+---
+
+
+
+```{r}
+#| message: false
+library(tidyverse)
+
+# 1. Create the dataset (Top 10 All-Time)
+# Stats as of early 2025 season
+nhl_goals <- tibble(
+  Player = c("Wayne Gretzky", "Alex Ovechkin", "Gordie Howe", "Jaromir Jagr", 
+             "Brett Hull", "Marcel Dionne", "Phil Esposito", "Mike Gartner", 
+             "Mark Messier", "Steve Yzerman"),
+  Goals = c(x, 868, 801, 766, 741, 731, 717, 708, 694, 692),
+  Status = c("Retired", "Active", "Retired", "Retired", 
+             "Retired", "Retired", "Retired", "Retired", 
+             "Retired", "Retired")
+)
+
+# 2. Plot
+nhl_goals |> 
+  # Reorder the Player factor by Goals so the bars are sorted
+  mutate(Player = fct_reorder(Player, Goals)) |> 
+  ggplot(aes(x = Goals, y = Player, fill = Status)) +
+  geom_col() +
+  # Add the goal count text at the end of the bars
+  geom_text(aes(label = Goals), hjust = -0.2, size = 3.5) +
+  # Customize colors (Highlight Active player)
+  scale_fill_manual(values = c("Active" = "#E31937", "Retired" = "gray70")) +
+  # Expand limits so the text labels fit
+  scale_x_continuous(expand = expansion(mult = c(0, 0.1))) +
+  labs(
+    title = "NHL All-Time Goal Scoring Leaders",
+    subtitle = "The chase for 894",
+    x = "Total Goals",
+    y = NULL,
+    caption = "Data: Manual Entry"
+  ) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.y = element_blank(),
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom"
+  )
+```

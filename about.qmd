@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-About this site
+David Kane teaches data science and New College of Florida. See the [GitHub repo](https://github.com/davidkane9/hockey) for details about this project.

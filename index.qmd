@@ -1,5 +1,4 @@
 ---
-title: "Hockey Analysis"
 execute: 
   echo: false
 ---
@@ -9,42 +8,56 @@ execute:
 ```{r}
 #| message: false
 library(tidyverse)
+library(ggrepel) 
 
-# 1. Create the dataset (Top 10 All-Time)
-# Stats as of early 2025 season
-nhl_goals <- tibble(
-  Player = c("Wayne Gretzky", "Alex Ovechkin", "Gordie Howe", "Jaromir Jagr", 
-             "Brett Hull", "Marcel Dionne", "Phil Esposito", "Mike Gartner", 
-             "Mark Messier", "Steve Yzerman"),
-  Goals = c(x, 868, 801, 766, 741, 731, 717, 708, 694, 692),
-  Status = c("Retired", "Active", "Retired", "Retired", 
-             "Retired", "Retired", "Retired", "Retired", 
-             "Retired", "Retired")
-)
+# 1. Load the data
+shots <- read_rds("clean_data.rds")
 
-# 2. Plot
-nhl_goals |> 
-  # Reorder the Player factor by Goals so the bars are sorted
-  mutate(Player = fct_reorder(Player, Goals)) |> 
-  ggplot(aes(x = Goals, y = Player, fill = Status)) +
-  geom_col() +
-  # Add the goal count text at the end of the bars
-  geom_text(aes(label = Goals), hjust = -0.2, size = 3.5) +
-  # Customize colors (Highlight Active player)
-  scale_fill_manual(values = c("Active" = "#E31937", "Retired" = "gray70")) +
-  # Expand limits so the text labels fit
-  scale_x_continuous(expand = expansion(mult = c(0, 0.1))) +
+# 2. Prepare the data
+season_trends <- shots |> 
+  summarize(
+    total_shots = n(),
+    total_games = n_distinct(game_id),
+    avg_xg_per_shot = mean(xg, na.rm = TRUE),
+    # Calculate shots per team per game
+    shots_per_game = total_shots / total_games / 2, 
+    .by = season
+  ) |> 
+  arrange(season) |> 
+  mutate(
+    # Create a grouping for color to highlight the modern era
+    era = if_else(as.numeric(season) < 2017, "2007-2016", "2017-Present")
+  )
+
+# 3. Create the Connected Scatter Plot
+season_trends |> 
+  ggplot(aes(x = shots_per_game, y = avg_xg_per_shot)) +
+  
+  # A. The Path: Connects the years in order
+  geom_path(color = "grey60", alpha = 0.6, arrow = arrow(length = unit(0.2, "cm"))) +
+  
+  # B. The Points: Colored by year/era
+  geom_point(aes(color = as.numeric(season)), size = 4) +
+  
+  # C. The Labels
+  geom_text_repel(aes(label = season), size = 3, max.overlaps = 20) +
+  
+  # D. Styling
+  scale_color_viridis_c(option = "magma", name = "Year") +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
   labs(
-    title = "NHL All-Time Goal Scoring Leaders",
-    subtitle = "The chase for 894",
-    x = "Total Goals",
-    y = NULL,
-    caption = "Data: Manual Entry"
+    title = "The NHL's Offensive Explosion",
+    subtitle = "The Analytics Era has broken the tradeoff: Teams are now creating\nMORE shots (Quantity) that are also HIGHER probability (Quality).",
+    x = "Shots per Team per Game",
+    y = "Average xG per Shot (Shot Quality)",
+    caption = "Data: MoneyPuck | Calculated from clean_data.rds"
   ) +
   theme_minimal() +
   theme(
-    panel.grid.major.y = element_blank(),
-    plot.title = element_text(face = "bold"),
-    legend.position = "bottom"
+    plot.title = element_text(face = "bold", size = 16),
+    legend.position = "none",
+    panel.grid.minor = element_blank()
   )
 ```
+
+This visualization illustrates the comprehensive offensive evolution of the NHL over the last two decades. Contrary to the idea that quality comes at the expense of volume, the data reveals that modern teams have managed to increase both the pace of play and the efficiency of their shooting. The trajectory moves from the bottom-left (lower volume, lower quality) in the late 2000s toward the top-right (higher volume, higher quality) in recent seasons. This suggests that improvements in player skill, speed, and analytics-driven strategies have allowed offenses to generate more total attempts while simultaneously penetrating high-danger areas more frequently. The data was sourced from MoneyPuck.com, covering all recorded shots since 2007.

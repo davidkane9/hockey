@@ -8,6 +8,25 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - text: Years
+        menu:
+          - 2007.qmd
+          - 2008.qmd
+          - 2009.qmd
+          - 2010.qmd
+          - 2011.qmd
+          - 2012.qmd
+          - 2013.qmd
+          - 2014.qmd
+          - 2015.qmd
+          - 2016.qmd
+          - 2017.qmd
+          - 2018.qmd
+          - 2019.qmd
+          - 2020.qmd
+          - 2021.qmd
+          - 2022.qmd
+          - 2023.qmd
 
 format:
   html:
@@ -16,6 +35,4 @@ format:
       - brand
     css: styles.css
     toc: true
-
-
 

@@ -50,7 +50,7 @@ season_trends |>
     subtitle = "The Analytics Era has broken the tradeoff: Teams are now creating\nMORE shots (Quantity) that are also HIGHER probability (Quality).",
     x = "Shots per Team per Game",
     y = "Average xG per Shot (Shot Quality)",
-    caption = "Data: MoneyPuck | Calculated from clean_data.rds"
+    caption = "Data: MoneyPuck"
   ) +
   theme_minimal() +
   theme(

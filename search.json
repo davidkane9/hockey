@@ -1,16 +1,16 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "David Kane teaches data science and New College of Florida. See the GitHub repo for details about this project."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Hockey Analysis",
     "section": "",
     "text": "This visualization illustrates the comprehensive offensive evolution of the NHL over the last two decades. Contrary to the idea that quality comes at the expense of volume, the data reveals that modern teams have managed to increase both the pace of play and the efficiency of their shooting. The trajectory moves from the bottom-left (lower volume, lower quality) in the late 2000s toward the top-right (higher volume, higher quality) in recent seasons. This suggests that improvements in player skill, speed, and analytics-driven strategies have allowed offenses to generate more total attempts while simultaneously penetrating high-danger areas more frequently. The data was sourced from MoneyPuck.com, covering all recorded shots since 2007."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "David Kane teaches data science and New College of Florida. See the GitHub repo for details about this project."
   }
 ]

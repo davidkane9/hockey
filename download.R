@@ -44,8 +44,13 @@ get_season_data <- function(year) {
         is_goal = goal,
         xg = x_goal
       ) |> 
-      mutate(season = as.character(year)) # Add season column so we know the year
-  }, error = function(e) return(NULL)) # Return NULL if file fails to read
+      mutate(season = as.character(year))
+  }, error = function(e) {
+    message(paste("Could not read", year))
+    return(NULL)
+  })
 }
 
-
+# 4. Download and process all seasons
+all_shots <- map(years, get_season_data) |> 
+  list_rbind()
